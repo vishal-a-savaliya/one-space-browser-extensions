@@ -41,9 +41,9 @@ function Signup(props) {
       <form
         onSubmit={submitHandler}
         method="post"
-        className="container mx-auto flex w-96 h-96 flex-col justify-around bg-c10"
+        className="container mx-auto flex w-96 h-96 flex-col justify-around "
       >
-        <h1 className="text-3xl font-bold  text-c4  mx-auto">Sign-Up</h1>
+        <h1 className="text-3xl font-bold    mx-auto">Sign-Up</h1>
         <div className="flex flex-col justify-center">
           <input
             value={email}

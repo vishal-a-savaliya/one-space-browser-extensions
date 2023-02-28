@@ -1,18 +1,11 @@
-import React, { useState } from "react";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import React from "react";
+import HomeScreen from "./components/HomeScreen";
+import SubCollection from "./components/SubCollection";
 function App() {
-  const [currentForm, setCurrentForm] = useState("login");
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  };
   return (
     <>
-      {currentForm === "login" ? (
-        <Login onFormSwitch={toggleForm} />
-      ) : (
-        <Signup onFormSwitch={toggleForm} />
-      )}
+      <HomeScreen></HomeScreen>
+      {/* <SubCollection></SubCollection> */}
     </>
   );
 }
