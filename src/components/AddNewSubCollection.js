@@ -7,6 +7,11 @@ function AddNewSubCollection(props) {
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
   const [tag, setTag] = useState("");
+  const subCollectionData = {
+    name: title,
+    link: link,
+    tag: tag,
+  };
   function titleHandler(e) {
     setTitle(e.target.value);
   }
@@ -18,8 +23,10 @@ function AddNewSubCollection(props) {
   }
   function submitHandler(e) {
     e.preventDefault();
-    props.onAdd(title);
+    props.onAdd(subCollectionData);
     setTitle("");
+    setLink("");
+    setTag("");
     console.log(title, link, tag);
     props.setIsToggled(false);
   }

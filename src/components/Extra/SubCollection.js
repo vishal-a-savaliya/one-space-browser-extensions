@@ -6,11 +6,19 @@ function SubCollection(props) {
       <ul className="grid grid-rows-1 gap-[16px] mx-[20px] my-[25px]  ">
         {props.subCollectionName.map((subcollectionName) => (
           <li
-            className=" p-[5px] hover:bg-blackish hover:text-white rounded-[8px]  bg-greenish text-center"
+            className="   bg-secondary"
             key={subcollectionName}
             onDoubleClick={props.onDoubleClick}
           >
-            {subcollectionName}
+            <div className="p-4">
+              <div className="font-semibold text-base text-primary">
+                {subcollectionName.name}
+              </div>
+              <div className="text-sky-500  font-semibold">
+                {subcollectionName.link}
+              </div>
+              <div>{subcollectionName.tag}</div>
+            </div>
           </li>
         ))}
       </ul>

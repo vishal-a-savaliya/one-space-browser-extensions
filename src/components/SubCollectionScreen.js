@@ -1,36 +1,62 @@
 import React, { useState } from "react";
 import Search from "./UIComponents/Search";
 import Button from "./UIComponents/Button";
-import SubCollection from "./UIComponents/SubCollection";
+import SubCollectionList from "./Collections/SubCollectionList";
 import Wrapper from "./UIComponents/Wrapper";
 import AddNewSubCollection from "./AddNewSubCollection";
+import SimplifiedArticle from "./SimplifiedArticle";
+import { useParams, Route, useNavigate, Routes } from "react-router-dom";
 
+const DUMMY_SUBCOLLECTION = [
+  {
+    id: "s1",
+    name: "Mobile App Development",
+    link: "https://www.example.com",
+    tag: "#MAD",
+  },
+  {
+    id: "s2",
+    name: "Compiler Design",
+    link: "https://www.example.com",
+    tag: "#CD",
+  },
+  {
+    id: "s3",
+    name: "MCWC",
+    link: "https://www.example.com",
+    tag: "#MCWC",
+  },
+];
 function SubCollectionScreen(props) {
+  const params = useParams();
   const [isToggled, setIsToggled] = useState(false);
-  const [subCollectionName, setSubCollectionName] = useState([
-    "MAD",
-    "CD",
-    "MCWC",
-    "CPDP",
-  ]);
-
+  const [subCollection, setSubCollection] = useState(DUMMY_SUBCOLLECTION);
+  const navigate = useNavigate();
   function backHandler(e) {
-    props.setIsSubCollectionToggled(false);
+    navigate(-1);
   }
 
   function clickHandler(e) {
     setIsToggled(!isToggled);
   }
   function addNewSubCollectionHandler(name) {
-    setSubCollectionName((prev) => {
+    setSubCollection((prev) => {
       return [name, ...prev];
     });
   }
+  function removeSubCollectionHandler(deletingSubCollectionid) {
+    const newSubCollection = subCollection.filter(
+      (subCollection) => subCollection.id !== deletingSubCollectionid
+    );
+    setSubCollection(newSubCollection);
+  }
   return (
     <>
-      <div className="p-[5px]  rounded-[8px]  bg-pinkish grid grid-cols-10">
+      <div className="p-[5px]  rounded-[8px]  font-semibold text-base text-primary grid grid-cols-10">
         <Button onClick={backHandler}>&larr;</Button>
-        <span className="col-span-8 text-center pt-[8px]">SubCollection</span>
+        <span className="col-span-8 text-center pt-[8px]">
+          SubCollection {params.collectionid}
+        </span>
       </div>
       <Wrapper>
         <Search additionalCSS="col-span-3"></Search>
@@ -43,11 +69,23 @@ function SubCollectionScreen(props) {
           onAdd={addNewSubCollectionHandler}
         />
       )}
-      <SubCollection
-        subCollectionName={subCollectionName}
-        onDoubleClick={props.onDoubleClickOnSubCollection}
-      ></SubCollection>
+      <SubCollectionList
+        subCollection={subCollection}
+        onRemoveSubCollectionItem={removeSubCollectionHandler}
+      />
+      <Routes>
+        <Route
+          path={`/homescreen/${params.collectionid}/:subcollectionid`}
+          element={<SimplifiedArticle />}
+        />
+      </Routes>
     </>
   );
 }
 export default SubCollectionScreen;
+{
+  /* <SubCollection
+        subCollection={subCollection}
+        onDoubleClick={props.onDoubleClickOnSubCollection}
+      ></SubCollection> */
+}

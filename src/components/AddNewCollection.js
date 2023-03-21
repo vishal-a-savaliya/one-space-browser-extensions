@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Input from "./UIComponents/Input";
 import Button from "./UIComponents/Button";
 import TagsInput from "./UIComponents/TagsInput";
-
 function AddNewCollection(props) {
   const [collectionName, setCollectionName] = useState("");
   const [text, setText] = useState("");
