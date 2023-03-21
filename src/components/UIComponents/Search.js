@@ -7,7 +7,7 @@ function Search(props) {
     <>
       <input
         type="search"
-        placeholder="Search"
+        placeholder={props.placeholder}
         className={`py-[8px] px-[16px] rounded-[8px] border border-sky-500   focus:outline-none   ${css}`}
         value={props.searchText}
         onChange={(e) => props.onSearch(e.target.value)}

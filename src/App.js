@@ -1,19 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import HomeScreen from "./components/HomeScreen";
 import SubCollectionScreen from "./components/SubCollectionScreen";
 import SimplifiedArticle from "./components/SimplifiedArticle";
 function App() {
-  const [isSubCollectionToggled, setIsSubCollectionToggled] = useState(false);
-  const [isArticleToggled, setIsArticleToggled] = useState(false);
-
-  function doubleClickHandler(e) {
-    setIsSubCollectionToggled(true);
-    console.log();
-  }
-  function dblClkHandler(e) {
-    setIsArticleToggled(true);
-  }
   return (
     <main className="h-[400px]  w-[400px] bg-blueish overflow-auto ">
       <Routes>
@@ -24,11 +14,12 @@ function App() {
           path="/homescreen/:collectionid/*"
           element={<SubCollectionScreen />}
         />
-        {/* <Route path="*" element={<div>Not Found</div>} /> */}
+        <Route
+          path="/homescreen/:collectionid/:subcollectionid"
+          element={<SimplifiedArticle />}
+        />
 
-        {/* <Route path="/homescreen/:collection-id/:subcollectionid">
-          <SimplifiedArticle></SimplifiedArticle>
-        </Route> */}
+        <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </main>
   );

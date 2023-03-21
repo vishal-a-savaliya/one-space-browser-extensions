@@ -1,18 +1,23 @@
 import React from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Button from "./UIComponents/Button";
 
 function SimplifiedArticle(props) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const params = useParams();
   function backHandler(e) {
-    props.setIsArticleToggled(false);
+    navigate(-1);
   }
   return (
     <>
       <div className="p-[5px]  rounded-[8px]  bg-pinkish grid grid-cols-10">
         <Button onClick={backHandler}>&larr;</Button>
         <h1 className="col-span-8 text-center pt-[8px]">
-          Steps to create your first Mobile application
+          {location.state.name}
         </h1>
       </div>
+
       <pre className="mt-[16px]">
         The steps include: <br /> 1)Download and install Android Studio.
         <br /> 2)Create a new project and select the type of app you want to

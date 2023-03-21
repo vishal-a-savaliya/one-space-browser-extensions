@@ -45,6 +45,7 @@ function HomeScreen(props) {
           onSearch={setSearchInput}
           searchText={searchInput}
           additionalCSS="col-span-2"
+          placeholder="Search... "
         ></Search>
         <Button onClick={clickHandler}>AddNew</Button>
         <Login />

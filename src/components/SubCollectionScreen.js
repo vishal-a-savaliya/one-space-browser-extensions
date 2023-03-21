@@ -4,8 +4,7 @@ import Button from "./UIComponents/Button";
 import SubCollectionList from "./Collections/SubCollectionList";
 import Wrapper from "./UIComponents/Wrapper";
 import AddNewSubCollection from "./AddNewSubCollection";
-import SimplifiedArticle from "./SimplifiedArticle";
-import { useParams, Route, useNavigate, Routes } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 const DUMMY_SUBCOLLECTION = [
   {
@@ -28,6 +27,7 @@ const DUMMY_SUBCOLLECTION = [
   },
 ];
 function SubCollectionScreen(props) {
+  const location = useLocation();
   const params = useParams();
   const [isToggled, setIsToggled] = useState(false);
   const [subCollection, setSubCollection] = useState(DUMMY_SUBCOLLECTION);
@@ -55,11 +55,14 @@ function SubCollectionScreen(props) {
       <div className="p-[5px]  rounded-[8px]  font-semibold text-base text-primary grid grid-cols-10">
         <Button onClick={backHandler}>&larr;</Button>
         <span className="col-span-8 text-center pt-[8px]">
-          SubCollection {params.collectionid}
+          {location.state.name}
         </span>
       </div>
       <Wrapper>
-        <Search additionalCSS="col-span-3"></Search>
+        <Search
+          additionalCSS="col-span-3"
+          placeholder="Search From collection"
+        ></Search>
         <Button onClick={clickHandler}>AddNew</Button>
       </Wrapper>
       {isToggled && (
@@ -73,19 +76,22 @@ function SubCollectionScreen(props) {
         subCollection={subCollection}
         onRemoveSubCollectionItem={removeSubCollectionHandler}
       />
-      <Routes>
-        <Route
-          path={`/homescreen/${params.collectionid}/:subcollectionid`}
-          element={<SimplifiedArticle />}
-        />
-      </Routes>
     </>
   );
 }
 export default SubCollectionScreen;
-{
-  /* <SubCollection
-        subCollection={subCollection}
-        onDoubleClick={props.onDoubleClickOnSubCollection}
-      ></SubCollection> */
-}
+// {
+//   /* <SubCollection
+//   subCollection={subCollection}
+//   onDoubleClick={props.onDoubleClickOnSubCollection}
+//   ></SubCollection> */
+// }
+
+// {
+//   /* <Routes>
+//   <Route
+//     path={`/homescreen/${params.collectionid}/:subcollectionid`}
+//     element={<SimplifiedArticle />}
+//   />
+// </Routes> */
+// }
