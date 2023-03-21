@@ -42,4 +42,5 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ## Important
 
 When using for development use `<BrowserRouter></BrowserRouter>` in App.js i.e.When using `npm start` command for development.
+
 When building the app use `<MemoryRouter></MemoryRouter>` in App.js i.e.When using `npm run build` command for building.
