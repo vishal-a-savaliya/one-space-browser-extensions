@@ -5,7 +5,7 @@ import TagsInput from "./UIComponents/TagsInput";
 function AddNewCollection(props) {
   const [collectionName, setCollectionName] = useState("");
   const [text, setText] = useState("");
-  const [tag, setTag] = useState("");
+  const [tag, setTag] = useState([]);
   const collectionData = {
     name: collectionName,
     about: text,
@@ -13,11 +13,15 @@ function AddNewCollection(props) {
   };
   function submitHandler(e) {
     e.preventDefault();
+    if (collectionName.trim().length === 0 || text.trim().length === 0) {
+      return;
+    }
     props.onAdd(collectionData);
     setCollectionName("");
     setText("");
     setTag("");
     props.setIsToggled(false);
+    console.log(tag);
   }
 
   function nameInputHandler(e) {
@@ -26,12 +30,18 @@ function AddNewCollection(props) {
   function textInputHandler(e) {
     setText(e.target.value);
   }
-  function tagInputHandler(e) {
-    setTag(e.target.value);
+  function tagAddHandler(tags) {
+    setTag(tags);
+  }
+  function closeHandler() {
+    props.setIsToggled(false);
   }
   return (
     <>
-      <div className="fixed inset-0 bg-slate-500 h-[450px] w-[450px] opacity-75"></div>
+      <div
+        onClick={closeHandler}
+        className="fixed inset-0 bg-slate-500 h-[450px] w-[450px] opacity-75"
+      ></div>
       <div className="fixed w-[350px] translate-x-4 translate-y--4  ">
         <form className="bg-greenish">
           <Input
@@ -48,13 +58,7 @@ function AddNewCollection(props) {
             value={text}
             onChange={textInputHandler}
           />
-          <TagsInput
-          // type="text"
-          // required
-          // placeholder="Tags"
-          // value={tag}
-          // onChange={tagInputHandler}
-          />
+          <TagsInput onAdd={tagAddHandler} />
           <Button onClick={submitHandler}>Add</Button>
         </form>
       </div>

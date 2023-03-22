@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 
-function TagsInput() {
+function TagsInput(props) {
   const [tags, setTags] = useState([]);
+
   function keyDownHandler(e) {
-    if (e.key !== "Enter") return;
-    const value = e.target.value;
-    if (!value.trim()) return;
-    setTags([...tags, value]);
-    e.target.value = "";
+    let actualTags;
+    if (!e.target.value.trim()) return;
+    if (e.key === "Enter") {
+      setTags([...tags, e.target.value]);
+      actualTags = [...tags, e.target.value];
+      e.target.value = "";
+    }
+
+    props.onAdd(actualTags);
   }
 
   function removeTag(index) {
@@ -33,7 +38,7 @@ function TagsInput() {
         onKeyDown={keyDownHandler}
         className=" grow py-[0.5em] px-[0] border-none outline-none "
         type="text"
-        placeholder="Enter tags..."
+        placeholder="Enter tags...(Optional)"
       ></input>
     </div>
   );

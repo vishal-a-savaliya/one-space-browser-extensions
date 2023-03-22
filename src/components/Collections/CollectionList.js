@@ -4,7 +4,7 @@ import CollectionItem from "./CollectionItem";
 function CollectionList(props) {
   return (
     <>
-      <ul className="grid grid-rows-1 gap-[16px] mx-[20px] my-[25px]  ">
+      <ul className="grid grid-rows-1 gap-[16px] mx-[20px] my-[20px]  ">
         {props.collection.map((collection) => (
           <CollectionItem
             key={collection.id}

@@ -13,10 +13,19 @@ function SubCollectionItem(props) {
             {props.name}
           </div>
           <div className="text-sky-500  font-semibold">{props.link}</div>
-          <div>{props.tag}</div>
+          <div className="flex gap-1 flex-wrap ">
+            {props.tag.map((tag, index) => (
+              <span
+                key={index}
+                className="bg-slate-300  inline-block px-1 rounded-lg"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </Link>
-      <div className="flex justify-center col-span-2">
+      <div className="flex justify-center flex-col col-span-2">
         <DeleteButton onClick={() => props.onRemoveSubCollectionItem(props.id)}>
           X
         </DeleteButton>

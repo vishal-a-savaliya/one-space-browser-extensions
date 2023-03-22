@@ -6,7 +6,7 @@ function AddNewSubCollection(props) {
   /*https://www.npmjs.com/package/react-tag-input*/
   const [title, setTitle] = useState("");
   const [link, setLink] = useState("");
-  const [tag, setTag] = useState("");
+  const [tag, setTag] = useState([]);
   const subCollectionData = {
     name: title,
     link: link,
@@ -18,8 +18,8 @@ function AddNewSubCollection(props) {
   function linkHandler(e) {
     setLink(e.target.value);
   }
-  function tagHandler(e) {
-    setTag(e.target.value);
+  function tagAddHandler(tags) {
+    setTag(tags);
   }
   function submitHandler(e) {
     e.preventDefault();
@@ -47,12 +47,7 @@ function AddNewSubCollection(props) {
             value={link}
             onChange={linkHandler}
           />
-          <TagsInput
-            type="text"
-            placeholder="Tag(Optional) "
-            value={tag}
-            onChange={tagHandler}
-          />
+          <TagsInput onAdd={tagAddHandler} />
           <Button onClick={submitHandler}>Save</Button>
         </form>
       </div>

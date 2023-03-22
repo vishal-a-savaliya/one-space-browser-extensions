@@ -5,7 +5,7 @@ import SubCollectionScreen from "./components/SubCollectionScreen";
 import SimplifiedArticle from "./components/SimplifiedArticle";
 function App() {
   return (
-    <main className="h-[400px]  w-[400px] bg-blueish overflow-auto ">
+    <main className="h-[25rem]  w-[25rem] bg-blueish overflow-auto ">
       <Routes>
         <Route path="/" element={<Navigate replace to="/homescreen" />} />
 

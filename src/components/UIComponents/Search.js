@@ -8,7 +8,7 @@ function Search(props) {
       <input
         type="search"
         placeholder={props.placeholder}
-        className={`py-[8px] px-[16px] rounded-[8px] border border-sky-500   focus:outline-none   ${css}`}
+        className={`py-[3px] px-[3px] rounded-[8px] border border-sky-500   focus:outline-none   ${css}`}
         value={props.searchText}
         onChange={(e) => props.onSearch(e.target.value)}
       />

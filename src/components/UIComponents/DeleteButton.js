@@ -2,11 +2,12 @@ import React from "react";
 function DeleteButton(props) {
   return (
     <button
-      className="invisible group-hover:visible inline-block border-2 my-10 px-2 hover:bg-red-500 "
+      className="  invisible group-hover:visible h-[20px] w-[20px] bg-primary text-secondary rounded-full inline-flex justify-center items-center  text-[18px] "
       {...props}
     >
-      x
+      &times;
     </button>
   );
 }
 export default DeleteButton;
+//invisible

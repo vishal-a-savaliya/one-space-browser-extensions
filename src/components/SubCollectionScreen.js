@@ -10,20 +10,20 @@ const DUMMY_SUBCOLLECTION = [
   {
     id: "s1",
     name: "Mobile App Development",
-    link: "https://www.example.com",
-    tag: "#MAD",
+    link: "https://developer.mozilla.org/en-US/docs/Web/CSS/border-color",
+    tag: ["#MAD"],
   },
   {
     id: "s2",
     name: "Compiler Design",
     link: "https://www.example.com",
-    tag: "#CD",
+    tag: ["#CD"],
   },
   {
     id: "s3",
     name: "MCWC",
     link: "https://www.example.com",
-    tag: "#MCWC",
+    tag: ["#MCWC"],
   },
 ];
 function SubCollectionScreen(props) {
@@ -52,7 +52,7 @@ function SubCollectionScreen(props) {
   }
   return (
     <>
-      <div className="p-[5px]  rounded-[8px]  font-semibold text-base text-primary grid grid-cols-10">
+      <div className="p-[3px]    font-semibold text-base text-primary grid grid-cols-10 border-b-2">
         <Button onClick={backHandler}>&larr;</Button>
         <span className="col-span-8 text-center pt-[8px]">
           {location.state.name}
@@ -72,10 +72,12 @@ function SubCollectionScreen(props) {
           onAdd={addNewSubCollectionHandler}
         />
       )}
-      <SubCollectionList
-        subCollection={subCollection}
-        onRemoveSubCollectionItem={removeSubCollectionHandler}
-      />
+      <div className="overflow-auto h-[17rem] w-[25rem]">
+        <SubCollectionList
+          subCollection={subCollection}
+          onRemoveSubCollectionItem={removeSubCollectionHandler}
+        />
+      </div>
     </>
   );
 }

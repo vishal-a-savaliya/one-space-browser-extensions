@@ -7,13 +7,19 @@ import Wrapper from "./UIComponents/Wrapper";
 import Login from "./Login";
 
 const DUMMY_COLLECTION = [
-  { id: "c1", name: "College", about: "College Subjects", tag: "#college" },
-  { id: "c2", name: "Games", about: "My Games Collection", tag: "#games" },
+  { id: "c1", name: "College", about: "College Subjects", tag: ["#college"] },
+  { id: "c2", name: "Games", about: "My Games Collection", tag: ["#games"] },
   {
     id: "c3",
     name: "Placement",
     about: "Collection of placement topic",
-    tag: "#tpo",
+    tag: ["#tpo"],
+  },
+  {
+    id: "c4",
+    name: "Clacement",
+    about: "Collection of placement topic",
+    tag: ["#tpo"],
   },
 ];
 
@@ -38,6 +44,7 @@ function HomeScreen(props) {
     );
     setCollection(newCollection);
   }
+  console.log(collection);
   return (
     <>
       <Wrapper>
@@ -50,6 +57,7 @@ function HomeScreen(props) {
         <Button onClick={clickHandler}>AddNew</Button>
         <Login />
       </Wrapper>
+
       {isToggled && (
         <AddNewCollection
           isToggled
@@ -57,10 +65,12 @@ function HomeScreen(props) {
           onAdd={addNewCollectionHandler}
         />
       )}
-      <CollectionList
-        collection={collection}
-        onRemoveCollectionItem={removeCollectionHandler}
-      ></CollectionList>
+      <div className="overflow-auto h-[20rem] w-[25rem]">
+        <CollectionList
+          collection={collection}
+          onRemoveCollectionItem={removeCollectionHandler}
+        ></CollectionList>
+      </div>
     </>
   );
 }
