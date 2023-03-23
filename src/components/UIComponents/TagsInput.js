@@ -19,16 +19,16 @@ function TagsInput(props) {
     setTags(tags.filter((el, i) => i !== index));
   }
   return (
-    <div className=" flex items-center flex-wrap gap-[0.5em]">
+    <div className=" flex items-center flex-wrap gap-[0.5em] m-2">
       {tags.map((tag, index) => (
         <div
           key={index}
-          className="bg-slate-300  inline-block px-[0.75em] py-[0.5em] rounded-[20px]"
+          className="bg-slate-300  inline-block px-2 py-1 rounded-[20px] text-sm"
         >
-          <span className="">{tag}</span>
+          <span>{tag}</span>
           <span
             onClick={() => removeTag(index)}
-            className="h-[20px] w-[20px] bg-primary text-secondary rounded-full inline-flex justify-center items-center ml-[0.5em] text-[18px]"
+            className="h-[15px] w-[15px] bg-primary text-secondary rounded-full inline-flex justify-center items-center ml-[0.5em] text-[18px]"
           >
             &times;
           </span>
@@ -36,7 +36,7 @@ function TagsInput(props) {
       ))}
       <input
         onKeyDown={keyDownHandler}
-        className=" grow py-[0.5em] px-[0] border-none outline-none "
+        className=" grow   outline-none p-[8px]  text-sm rounded-[8px]"
         type="text"
         placeholder="Enter tags...(Optional)"
       ></input>

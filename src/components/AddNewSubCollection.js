@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Input from "./UIComponents/Input";
 import Button from "./UIComponents/Button";
 import TagsInput from "./UIComponents/TagsInput";
+import CloseButton from "./UIComponents/CloseButton";
 function AddNewSubCollection(props) {
   /*https://www.npmjs.com/package/react-tag-input*/
   const [title, setTitle] = useState("");
@@ -23,33 +24,52 @@ function AddNewSubCollection(props) {
   }
   function submitHandler(e) {
     e.preventDefault();
+    if (title.trim().length === 0 || link.trim().length === 0) {
+      return;
+    }
     props.onAdd(subCollectionData);
     setTitle("");
     setLink("");
-    setTag("");
+    setTag([]);
     console.log(title, link, tag);
+    props.setIsToggled(false);
+  }
+  function closeHandler() {
     props.setIsToggled(false);
   }
   return (
     <>
-      <div className="fixed inset-0 bg-slate-500 h-[450px] w-[450px] opacity-75"></div>
-      <div className="fixed w-[350px] translate-x-[44px] translate-y-[-64px] ">
-        <form className=" bg-greenish grid grid-rows-1 gap-[16px] mx-[20px] my-[25px] rounded-[8px] p-[8px]">
-          <Input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={titleHandler}
-          />
-          <Input
-            type="text"
-            placeholder="Link"
-            value={link}
-            onChange={linkHandler}
-          />
-          <TagsInput onAdd={tagAddHandler} />
-          <Button onClick={submitHandler}>Save</Button>
-        </form>
+      <div
+        className="fixed inset-0 bg-slate-500 h-[25rem] w-[25rem] opacity-80"
+        onClick={closeHandler}
+      ></div>
+      <div className="fixed w-[350px] translate-x-[23px]  translate-y-[-85px]  bg-sky-200 rounded-lg">
+        <div className="px-4 py-2 font-semibold text-base text-primary flex justify-between">
+          Add New Collection
+          <div className="flex justify-center flex-col">
+            <CloseButton onClick={closeHandler} />
+          </div>
+        </div>
+        <div className="h-[288px] overflow-auto">
+          <form className=" grid grid-rows-1 border-2 p-2">
+            <Input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={titleHandler}
+            />
+            <Input
+              type="url"
+              placeholder="Link"
+              value={link}
+              onChange={linkHandler}
+            />
+            <TagsInput onAdd={tagAddHandler} />
+            <Button onClick={submitHandler} className="p-[8px] m-[8px]">
+              Save
+            </Button>
+          </form>
+        </div>
       </div>
     </>
   );

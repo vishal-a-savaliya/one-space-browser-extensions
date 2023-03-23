@@ -26,9 +26,9 @@ function SubCollectionItem(props) {
         </div>
       </Link>
       <div className="flex justify-center flex-col col-span-2">
-        <DeleteButton onClick={() => props.onRemoveSubCollectionItem(props.id)}>
-          X
-        </DeleteButton>
+        <DeleteButton
+          onClick={() => props.onRemoveSubCollectionItem(props.id)}
+        />
       </div>
     </li>
   );

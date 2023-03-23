@@ -5,7 +5,7 @@ function Button(props) {
     <>
       <button
         type="button"
-        className="bg-sky-500 text-secondary hover:bg-blackish hover:text-white py-[8px] px-[16px] rounded-[8px]"
+        className={`bg-sky-500 text-secondary hover:bg-blackish hover:text-white py-[8px] px-[16px] rounded-lg ${props.className}`}
         onClick={props.onClick}
       >
         {props.children}

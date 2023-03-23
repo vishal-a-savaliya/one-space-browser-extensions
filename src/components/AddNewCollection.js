@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Input from "./UIComponents/Input";
 import Button from "./UIComponents/Button";
 import TagsInput from "./UIComponents/TagsInput";
+import CloseButton from "./UIComponents/CloseButton";
 function AddNewCollection(props) {
   const [collectionName, setCollectionName] = useState("");
   const [text, setText] = useState("");
@@ -19,7 +20,7 @@ function AddNewCollection(props) {
     props.onAdd(collectionData);
     setCollectionName("");
     setText("");
-    setTag("");
+    setTag([]);
     props.setIsToggled(false);
     console.log(tag);
   }
@@ -40,29 +41,48 @@ function AddNewCollection(props) {
     <>
       <div
         onClick={closeHandler}
-        className="fixed inset-0 bg-slate-500 h-[450px] w-[450px] opacity-75"
+        className="fixed inset-0 bg-slate-500 h-[25rem] w-[25rem] opacity-80"
       ></div>
-      <div className="fixed w-[350px] translate-x-4 translate-y--4  ">
-        <form className="bg-greenish">
-          <Input
-            type="text"
-            required
-            placeholder="Collection Name"
-            value={collectionName}
-            onChange={nameInputHandler}
-          />
-          <Input
-            type="text"
-            required
-            placeholder="text"
-            value={text}
-            onChange={textInputHandler}
-          />
-          <TagsInput onAdd={tagAddHandler} />
-          <Button onClick={submitHandler}>Add</Button>
-        </form>
+      <div className="fixed w-[350px] translate-x-[23px]  translate-y-[-32px] bg-sky-200 rounded-lg">
+        <div className="px-4 py-2 font-semibold text-base text-primary flex justify-between ">
+          Add New Collection
+          <div className="flex justify-center flex-col">
+            <CloseButton onClick={closeHandler} />
+          </div>
+        </div>
+        <div className="h-[288px] overflow-auto">
+          <form className="grid grid-rows-1 border-t-2 p-2 ">
+            <Input
+              type="text"
+              required
+              placeholder="Collection Name"
+              value={collectionName}
+              onChange={nameInputHandler}
+            />
+            <Input
+              type="text"
+              required
+              placeholder="Text"
+              value={text}
+              onChange={textInputHandler}
+            />
+            <TagsInput onAdd={tagAddHandler} />
+            <Button onClick={submitHandler} className="p-[8px] m-[8px]">
+              Add
+            </Button>
+          </form>
+        </div>
       </div>
     </>
   );
 }
 export default AddNewCollection;
+
+{
+  /* <button
+            className="h-[20px] w-[20px] bg-primary text-secondary rounded-full inline-flex justify-center items-center  text-[18px] pb-1"
+            onClick={closeHandler}
+          >
+            &times;
+          </button> */
+}
