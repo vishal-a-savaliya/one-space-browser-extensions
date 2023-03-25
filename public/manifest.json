@@ -13,5 +13,9 @@
     "tabs",
     "storage",
     "activeTab"
-  ]
+  ],
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' ; script-src-elem 'self' *;connect-src * data: blob: filesystem:;",
+    "sandbox": "sandbox allow-scripts; script-src 'self' * "
+  }
 }

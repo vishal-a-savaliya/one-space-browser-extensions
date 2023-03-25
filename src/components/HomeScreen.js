@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Search from "./UIComponents/Search";
 import Button from "./UIComponents/Button";
 import CollectionList from "./Collections/CollectionList";
 import AddNewCollection from "./AddNewCollection";
 import Wrapper from "./UIComponents/Wrapper";
 import Login from "./Login";
+
+import { UserAuth } from "../context/AuthContext";
 
 const DUMMY_COLLECTION = [
   { id: "c1", name: "College", about: "College Subjects", tag: ["#college"] },
@@ -29,7 +32,17 @@ function HomeScreen(props) {
   const [collection, setCollection] = useState(DUMMY_COLLECTION);
   // const [text, setText] = useState("");
   // const [tag, setTag] = useState("");
-
+  const { user, logOut } = UserAuth();
+  const navigate = useNavigate();
+  console.log(user);
+  const logOutHandler = async () => {
+    try {
+      await logOut();
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(user);
+  };
   function clickHandler() {
     setIsToggled(!isToggled);
   }
@@ -44,7 +57,11 @@ function HomeScreen(props) {
     );
     setCollection(newCollection);
   }
-  console.log(collection);
+  useEffect(() => {
+    if (user === null) {
+      navigate("/signin");
+    }
+  }, [user]);
   return (
     <>
       <Wrapper>
@@ -55,7 +72,8 @@ function HomeScreen(props) {
           placeholder="Search... "
         ></Search>
         <Button onClick={clickHandler}>AddNew</Button>
-        <Login />
+        <Button onClick={logOutHandler}>Logout</Button>
+        {/* <Login /> */}
       </Wrapper>
 
       {isToggled && (

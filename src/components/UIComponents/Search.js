@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 function Search(props) {
   const [css] = useState(props.additionalCSS);
-  console.log(props.additionalCSS);
   return (
     <>
       <input

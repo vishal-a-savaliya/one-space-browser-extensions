@@ -3,25 +3,29 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import HomeScreen from "./components/HomeScreen";
 import SubCollectionScreen from "./components/SubCollectionScreen";
 import SimplifiedArticle from "./components/SimplifiedArticle";
+import SigninScreen from "./components/SigninScreen";
+import { AuthContextProvider } from "./context/AuthContext";
 function App() {
   return (
-    <main className="h-[25rem]  w-[25rem] bg-blueish overflow-auto ">
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/homescreen" />} />
+    <AuthContextProvider>
+      <main className=" h-[25rem]  w-[25rem] bg-blueish overflow-auto ">
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/homescreen" />} />
+          <Route path="/signin" element={<SigninScreen />} />
+          <Route path="/homescreen/*" element={<HomeScreen />} />
+          <Route
+            path="/homescreen/:collectionid/*"
+            element={<SubCollectionScreen />}
+          />
+          <Route
+            path="/homescreen/:collectionid/:subcollectionid"
+            element={<SimplifiedArticle />}
+          />
 
-        <Route path="/homescreen/*" element={<HomeScreen />} />
-        <Route
-          path="/homescreen/:collectionid/*"
-          element={<SubCollectionScreen />}
-        />
-        <Route
-          path="/homescreen/:collectionid/:subcollectionid"
-          element={<SimplifiedArticle />}
-        />
-
-        <Route path="*" element={<div>Not Found</div>} />
-      </Routes>
-    </main>
+          <Route path="*" element={<div>Not Found</div>} />
+        </Routes>
+      </main>
+    </AuthContextProvider>
   );
 }
 
