@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 function TagsInput(props) {
-  const [tags, setTags] = useState([]);
+  //  Hooks
+  const [tags, setTags] = useState(props.tags ? props.tags : []);
 
+  //Event Handlers
   function keyDownHandler(e) {
     let actualTags;
     if (!e.target.value.trim()) return;
@@ -11,13 +13,15 @@ function TagsInput(props) {
       actualTags = [...tags, e.target.value];
       e.target.value = "";
     }
-
     props.onAdd(actualTags);
   }
 
   function removeTag(index) {
-    setTags(tags.filter((el, i) => i !== index));
+    let actualTags = tags.filter((el, i) => i !== index);
+    setTags(actualTags);
+    props.onAdd(actualTags);
   }
+
   return (
     <div className=" flex items-center flex-wrap gap-[0.5em] m-2">
       {tags.map((tag, index) => (

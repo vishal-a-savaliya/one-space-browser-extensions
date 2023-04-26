@@ -1,5 +1,5 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
 // import { getAnalytics } from "firebase/analytics";
 // // TODO: Add SDKs for Firebase products that you want to use
@@ -10,6 +10,7 @@ import { getAuth } from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyCTQTzO8MMiG7ruULepj4GjkcTpRfcCsZc",
   authDomain: "one-space-store.firebaseapp.com",
+  databaseURL: "https://one-space-store-default-rtdb.firebaseio.com",
   projectId: "one-space-store",
   storageBucket: "one-space-store.appspot.com",
   messagingSenderId: "860818350032",
@@ -19,4 +20,5 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export const db = getDatabase(app);
 export const auth = getAuth(app);

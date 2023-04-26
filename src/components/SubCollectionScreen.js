@@ -1,61 +1,88 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Search from "./UIComponents/Search";
 import Button from "./UIComponents/Button";
 import SubCollectionList from "./Collections/SubCollectionList";
 import Wrapper from "./UIComponents/Wrapper";
 import AddNewSubCollection from "./AddNewSubCollection";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-
-const DUMMY_SUBCOLLECTION = [
-  {
-    id: "s1",
-    name: "Mobile App Development",
-    link: "https://developer.mozilla.org/en-US/docs/Web/CSS/border-color",
-    tag: ["#MAD"],
-  },
-  {
-    id: "s2",
-    name: "Compiler Design",
-    link: "https://www.example.com",
-    tag: ["#CD"],
-  },
-  {
-    id: "s3",
-    name: "MCWC",
-    link: "https://www.example.com",
-    tag: ["#MCWC"],
-  },
-];
-function SubCollectionScreen(props) {
+import { UserAuth } from "../context/AuthContext";
+import { db } from "../firebase";
+import { set, ref, onValue } from "firebase/database";
+function SubCollectionScreen() {
+  //Hooks
   const location = useLocation();
   const params = useParams();
   const [isToggled, setIsToggled] = useState(false);
-  const [subCollection, setSubCollection] = useState(DUMMY_SUBCOLLECTION);
+  const [subCollection, setSubCollection] = useState([]);
   const navigate = useNavigate();
-  function backHandler(e) {
+  //End Hooks
+
+  //Context
+  const { user } = UserAuth();
+  //EndContext
+
+  //Essential variables
+  const index = location.state.index;
+  //End Essential variables
+
+  //Event Handlers
+  function backHandler() {
     navigate(-1);
   }
 
-  function clickHandler(e) {
+  function clickHandler() {
     setIsToggled(!isToggled);
   }
-  function addNewSubCollectionHandler(name) {
+
+  function addNewSubCollectionHandler(subCollection) {
     setSubCollection((prev) => {
-      return [name, ...prev];
+      const updatedNotes = [subCollection, ...prev];
+      setNotes(updatedNotes);
+      return updatedNotes;
     });
   }
-  function removeSubCollectionHandler(deletingSubCollectionid) {
+
+  function removeSubCollectionHandler(deletingSubCollectionTitle) {
+    console.log(subCollection);
     const newSubCollection = subCollection.filter(
-      (subCollection) => subCollection.id !== deletingSubCollectionid
+      (subCollection) => subCollection.title !== deletingSubCollectionTitle
     );
+    setNotes(newSubCollection);
     setSubCollection(newSubCollection);
   }
+  //End Event Handlers
+
+  // CRUD Functions
+  function setNotes(data) {
+    set(ref(db, "users/" + user.uid + "/" + index + "/Notes"), { ...data });
+  }
+
+  useEffect(() => {
+    if (user) {
+      // Create a database reference to the user's data based on their UID
+      const userRef = ref(db, `users/${user.uid}/${index}/Notes`);
+
+      // Listen for changes to the user's data in real-time
+      onValue(userRef, (snapshot) => {
+        if (snapshot.exists()) {
+          // Convert the data to an array and set it in state
+          const data = snapshot.val();
+          const dataArray = Object.keys(data).map((key) => data[key]);
+          setSubCollection(dataArray);
+        } else {
+          console.log("No data available");
+        }
+      });
+    }
+  }, [user, index]);
+  //End CRUD Functions
+
   return (
     <>
       <div className="p-[3px]    font-semibold text-base text-primary grid grid-cols-10 border-b-2">
         <Button onClick={backHandler}>&larr;</Button>
         <span className="col-span-8 text-center pt-[8px]">
-          {location.state.name}
+          {params.subcollection}
         </span>
       </div>
       <Wrapper>
@@ -76,24 +103,11 @@ function SubCollectionScreen(props) {
         <SubCollectionList
           subCollection={subCollection}
           onRemoveSubCollectionItem={removeSubCollectionHandler}
+          notesIndex={index}
         />
       </div>
     </>
   );
 }
 export default SubCollectionScreen;
-// {
-//   /* <SubCollection
-//   subCollection={subCollection}
-//   onDoubleClick={props.onDoubleClickOnSubCollection}
-//   ></SubCollection> */
-// }
-
-// {
-//   /* <Routes>
-//   <Route
-//     path={`/homescreen/${params.collectionid}/:subcollectionid`}
-//     element={<SimplifiedArticle />}
-//   />
-// </Routes> */
-// }
+// "users/" + user.uid + "/" + index + "/Notes"

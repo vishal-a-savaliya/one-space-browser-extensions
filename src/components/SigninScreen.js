@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Login from "./Login";
 import { UserAuth } from "../context/AuthContext";
 import Button from "./UIComponents/Button";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +17,7 @@ function SigninScreen() {
     if (user !== null) {
       navigate("/homescreen");
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <>

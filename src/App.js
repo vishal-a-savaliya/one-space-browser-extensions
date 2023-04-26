@@ -10,15 +10,15 @@ function App() {
     <AuthContextProvider>
       <main className=" h-[25rem]  w-[25rem] bg-blueish overflow-auto ">
         <Routes>
-          <Route path="/" element={<Navigate replace to="/homescreen" />} />
+          <Route path="/" element={<Navigate replace to="/signin" />} />
           <Route path="/signin" element={<SigninScreen />} />
           <Route path="/homescreen/*" element={<HomeScreen />} />
           <Route
-            path="/homescreen/:collectionid/*"
+            path="/homescreen/:subcollection/*"
             element={<SubCollectionScreen />}
           />
           <Route
-            path="/homescreen/:collectionid/:subcollectionid"
+            path="/homescreen/:subcollection/:article"
             element={<SimplifiedArticle />}
           />
 
@@ -30,34 +30,3 @@ function App() {
 }
 
 export default App;
-
-// {!isArticleToggled ? (
-//   <>
-//     {!isSubCollectionToggled ? (
-//       <HomeScreen onDoubleClickOnCollection={doubleClickHandler} />
-//     ) : (
-//       <SubCollectionScreen
-//         onDoubleClickOnSubCollection={dblClkHandler}
-//         setIsSubCollectionToggled={setIsSubCollectionToggled}
-//       />
-//     )}
-//   </>
-// ) : (
-//   <>
-//     {isArticleToggled && (
-//       <SimplifiedArticle setIsArticleToggled={setIsArticleToggled} />
-//     )}
-//   </>
-// )}
-
-/* <Routes>
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/subcollectionscreen" element={<SubCollectionScreen />} />
-        <Route path="/simplifiedarticle" element={<SimplifiedArticle />} />
-      </Routes> */
-
-// <Routes>
-//   <Route path="/" element={<HomeScreen />} />
-//   <Route path="/subcollectionscreen" element={<SubCollectionScreen />} />
-//   <Route path="/simplifiedarticle" element={<SimplifiedArticle />} />
-// </Routes>

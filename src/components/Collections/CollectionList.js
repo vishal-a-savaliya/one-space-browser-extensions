@@ -1,17 +1,16 @@
-import Button from "../UIComponents/Button";
 import CollectionItem from "./CollectionItem";
 
 function CollectionList(props) {
   return (
     <>
       <ul className="grid grid-rows-1 gap-[16px] mx-[20px] my-[20px]  ">
-        {props.collection.map((collection) => (
+        {props.collection.map((collection, i) => (
           <CollectionItem
-            key={collection.id}
-            id={collection.id}
-            name={collection.name}
-            about={collection.about}
-            tag={collection.tag}
+            key={Math.random()}
+            index={i}
+            title={collection.title}
+            description={collection.description}
+            tags={collection.tags}
             onRemoveCollectionItem={props.onRemoveCollectionItem}
           />
         ))}

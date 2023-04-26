@@ -3,15 +3,15 @@ import Input from "./UIComponents/Input";
 import Button from "./UIComponents/Button";
 import TagsInput from "./UIComponents/TagsInput";
 import CloseButton from "./UIComponents/CloseButton";
-function AddNewSubCollection(props) {
+function EditSubCollection(props) {
   /*https://www.npmjs.com/package/react-tag-input*/
 
   // Hooks
-  const [title, setTitle] = useState("");
-  const [link, setLink] = useState("");
-  const [tag, setTag] = useState([]);
+  const [title, setTitle] = useState(props.title);
+  const [link, setLink] = useState(props.url);
+  const [tag, setTag] = useState(props.tags);
 
-  //Essential Variables
+  // Essential Variables
   const subCollectionData = {
     title: title,
     url: link,
@@ -24,27 +24,20 @@ function AddNewSubCollection(props) {
     if (title.trim().length === 0 || link.trim().length === 0) {
       return;
     }
-    props.onAdd(subCollectionData);
-    setTitle("");
-    setLink("");
-    setTag([]);
-    props.setIsToggled(false);
+    props.onEdit(subCollectionData);
+    props.setToggleEdit(false);
   }
-
   function titleHandler(e) {
     setTitle(e.target.value);
   }
-
   function linkHandler(e) {
     setLink(e.target.value);
   }
-
   function tagAddHandler(tags) {
     setTag(tags);
   }
-
   function closeHandler() {
-    props.setIsToggled(false);
+    props.setToggleEdit(false);
   }
   return (
     <>
@@ -52,9 +45,9 @@ function AddNewSubCollection(props) {
         className="fixed inset-0 bg-slate-500 h-[25rem] w-[25rem] opacity-80"
         onClick={closeHandler}
       ></div>
-      <div className="fixed w-[350px] translate-x-[23px]  translate-y-[-85px]  bg-sky-200 rounded-lg">
+      <div className="fixed w-[350px]  translate-y-[-115px]  bg-sky-200 rounded-lg">
         <div className="px-4 py-2 font-semibold text-base text-primary flex justify-between">
-          Add Notes
+          Edit
           <div className="flex justify-center flex-col">
             <CloseButton onClick={closeHandler} />
           </div>
@@ -68,9 +61,9 @@ function AddNewSubCollection(props) {
               onChange={titleHandler}
             />
             <Input placeholder="Link" value={link} onChange={linkHandler} />
-            <TagsInput onAdd={tagAddHandler} />
+            <TagsInput onAdd={tagAddHandler} tags={props.tags} />
             <Button onClick={submitHandler} className="p-[8px] m-[8px]">
-              Add
+              Save Changes
             </Button>
           </form>
         </div>
@@ -78,4 +71,4 @@ function AddNewSubCollection(props) {
     </>
   );
 }
-export default AddNewSubCollection;
+export default EditSubCollection;

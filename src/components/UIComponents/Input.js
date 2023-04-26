@@ -1,15 +1,10 @@
-import React, { useState } from "react";
-import Button from "./Button";
-function Input(props) {
-  // const[required,setRequired]=useState(required)
-  // if(props.required){
+import React from "react";
 
-  // }
+function Input(props) {
   return (
     <>
       <input
         type={props.type}
-        required={props.required}
         placeholder={props.placeholder}
         value={props.value}
         onChange={props.onChange}

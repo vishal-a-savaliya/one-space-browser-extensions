@@ -1,11 +1,13 @@
 import React from "react";
+import CIcon from "@coreui/icons-react";
+import { cilXCircle } from "@coreui/icons";
 function DeleteButton(props) {
   return (
     <button
-      className="  invisible group-hover:visible h-[20px] w-[20px] bg-primary text-secondary rounded-full inline-flex justify-center items-center  text-[18px] pb-1 "
+      className="invisible  group-hover:visible rounded-md hover:bg-black hover:text-white h-auto w-auto p-1 "
       {...props}
     >
-      &times;
+      <CIcon icon={cilXCircle} size="xl" />
     </button>
   );
 }
