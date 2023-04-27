@@ -11,7 +11,6 @@ import { set, ref, onValue } from "firebase/database";
 
 function HomeScreen() {
   //Hooks
-  const [searchInput, setSearchInput] = useState("");
   const [isToggled, setIsToggled] = useState(false);
   const [collection, setCollection] = useState([]);
   const { user, logOut } = UserAuth();
@@ -49,43 +48,63 @@ function HomeScreen() {
   //End Event handlers
 
   //CRUD functions from db
+  // function readDataBase() {
+  //   if (user === null) {
+  //     navigate("/signin");
+  //     return;
+  //   }
+  //   if (user) {
+  //     // Create a database reference to the user's data based on their UID
+  //     const userRef = ref(db, `users/${user.uid}`);
+
+  //     // Listen for changes to the user's data in real-time
+  //     onValue(userRef, (snapshot) => {
+  //       if (snapshot.exists()) {
+  //         // Convert the data to an array and set it in state
+  //         const data = snapshot.val();
+  //         const dataArray = Object.keys(data).map((key) => data[key]);
+  //         setCollection(dataArray);
+  //       } else {
+  //         console.log("No data available");
+  //       }
+  //     });
+  //   }
+  // }
   function setDatabase(data) {
     set(ref(db, "users/" + user.uid), { ...data });
   }
-  useEffect(() => {
-    // Check if user is logged in
-    if (user === null) {
-      navigate("/signin");
-      return;
-    }
-    if (user) {
-      // Create a database reference to the user's data based on their UID
-      const userRef = ref(db, `users/${user.uid}`);
 
-      // Listen for changes to the user's data in real-time
-      onValue(userRef, (snapshot) => {
-        if (snapshot.exists()) {
-          // Convert the data to an array and set it in state
-          const data = snapshot.val();
-          const dataArray = Object.keys(data).map((key) => data[key]);
-          setCollection(dataArray);
-        } else {
-          console.log("No data available");
-        }
-      });
-    }
+  useEffect(() => {
+    const readDataBase = async () => {
+      if (user === null) {
+        navigate("/signin");
+        return;
+      }
+      if (user) {
+        // Create a database reference to the user's data based on their UID
+        const userRef = ref(db, `users/${user.uid}`);
+
+        // Listen for changes to the user's data in real-time
+        onValue(userRef, (snapshot) => {
+          if (snapshot.exists()) {
+            // Convert the data to an array and set it in state
+            const data = snapshot.val();
+            const dataArray = Object.keys(data).map((key) => data[key]);
+            setCollection(dataArray);
+          } else {
+            console.log("No data available");
+          }
+        });
+      }
+    };
+    readDataBase();
   }, [user, navigate]);
   //End CRUD functions from db
 
   return (
     <>
       <Wrapper>
-        <Search
-          onSearch={setSearchInput}
-          searchText={searchInput}
-          additionalCSS="col-span-2"
-          placeholder="Search... "
-        ></Search>
+        <Search additionalCSS="col-span-2" placeholder="Search... "></Search>
         <Button onClick={clickHandler}>AddNew</Button>
         <Button onClick={logOutHandler}>Logout</Button>
       </Wrapper>

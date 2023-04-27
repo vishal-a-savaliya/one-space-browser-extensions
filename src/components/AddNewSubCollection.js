@@ -15,7 +15,7 @@ function AddNewSubCollection(props) {
   const subCollectionData = {
     title: title,
     url: link,
-    tags: tag,
+    tags: tag ? tag : [],
   };
 
   // Event Handlers

@@ -27,7 +27,7 @@ function TagsInput(props) {
       {tags.map((tag, index) => (
         <div
           key={index}
-          className="bg-slate-300  inline-block px-2 py-1 rounded-[20px] text-sm"
+          className="bg-slate-300 break-all inline-block px-2 py-1 rounded-[20px] text-sm"
         >
           <span>{tag}</span>
           <span

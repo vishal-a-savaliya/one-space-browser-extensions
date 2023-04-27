@@ -51,9 +51,13 @@ function CollectionItem(props) {
           state={{ index: props.index }}
         >
           <div className="p-2">
-            <div className="font-bold text-base text-primary">{data.title}</div>
-            <div className="text-sky-500  font-semibold">{data.desc}</div>
-            <div className="flex flex-wrap gap-2 mt-2  ">
+            <div className="break-all whitespace-nowrap overflow-hidden text-ellipsis max-w-[286px] font-bold text-base text-primary">
+              {data.title}
+            </div>
+            <div className="break-all whitespace-nowrap overflow-hidden text-ellipsis max-w-[286px] text-sky-500  font-semibold">
+              {data.desc}
+            </div>
+            <div className="break-all flex flex-wrap gap-2 mt-2  ">
               {data.tags &&
                 data.tags.map((tag, index) => (
                   <span

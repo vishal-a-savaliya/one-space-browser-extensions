@@ -14,7 +14,7 @@ function AddNewCollection(props) {
   const collectionData = {
     title: collectionName,
     description: text,
-    tags: tag,
+    tags: tag ? tag : [],
   };
 
   // Event Handlers

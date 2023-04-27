@@ -58,22 +58,25 @@ function SubCollectionScreen() {
   }
 
   useEffect(() => {
-    if (user) {
-      // Create a database reference to the user's data based on their UID
-      const userRef = ref(db, `users/${user.uid}/${index}/Notes`);
+    const readNotes = async () => {
+      if (user) {
+        // Create a database reference to the user's data based on their UID
+        const userRef = ref(db, `users/${user.uid}/${index}/Notes`);
 
-      // Listen for changes to the user's data in real-time
-      onValue(userRef, (snapshot) => {
-        if (snapshot.exists()) {
-          // Convert the data to an array and set it in state
-          const data = snapshot.val();
-          const dataArray = Object.keys(data).map((key) => data[key]);
-          setSubCollection(dataArray);
-        } else {
-          console.log("No data available");
-        }
-      });
-    }
+        // Listen for changes to the user's data in real-time
+        onValue(userRef, (snapshot) => {
+          if (snapshot.exists()) {
+            // Convert the data to an array and set it in state
+            const data = snapshot.val();
+            const dataArray = Object.keys(data).map((key) => data[key]);
+            setSubCollection(dataArray);
+          } else {
+            console.log("No data available");
+          }
+        });
+      }
+    };
+    readNotes();
   }, [user, index]);
   //End CRUD Functions
 

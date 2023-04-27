@@ -8,7 +8,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 function App() {
   return (
     <AuthContextProvider>
-      <main className=" h-[25rem]  w-[25rem] bg-blueish overflow-auto ">
+      <main className=" h-[25rem]  w-[25rem] bg-blueish overflow-x-hidden overflow-y-auto break-normal">
         <Routes>
           <Route path="/" element={<Navigate replace to="/signin" />} />
           <Route path="/signin" element={<SigninScreen />} />
