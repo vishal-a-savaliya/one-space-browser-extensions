@@ -16,32 +16,33 @@ function SimplifiedArticle(props) {
   console.log(URL);
 
   useEffect(() => {
-    async function simplyfyArticle() {
-      setLoading(true);
-      const response = await fetch(
-        "https://one-space-backend.vercel.app/scrape",
-        {
-          // mode: "no-cors",
-          method: "POST",
-          body: JSON.stringify({ url: URL }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      ).catch((e) => console.log(e));
-      const data = await response.json();
-      console.log(data);
-      setWebData(data);
-      setLoading(false);
-    }
-
     simplyfyArticle();
-  }, [URL]);
+  }, []);
+
+
+  async function simplyfyArticle() {
+    setLoading(true);
+    const response = await fetch(
+      "https://one-space-backend.vercel.app/scrape",
+      {
+        // mode: "no-cors",
+        method: "POST",
+        body: JSON.stringify({ url: URL }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).catch((e) => console.log(e));
+    const data = await response.json();
+    console.log(data);
+    setWebData(data.html);
+    setLoading(false);
+  }
+
   return (
     <>
       <div className="p-[3px] font-semibold text-base text-primary grid grid-cols-10 border-b-2">
         <Button onClick={backHandler}>&larr;</Button>
-        <h1 className="col-span-8 text-center pt-[8px]">{params.article}</h1>
       </div>
       <div className="overflow-y-auto overflow-x-hidden h-[20rem] w-[25rem]">
         <div>
@@ -50,10 +51,13 @@ function SimplifiedArticle(props) {
               Loading...
             </div>
           ) : webData ? (
-            <div
-              className="break-normal mx-4 my-2"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(webData) }}
-            />
+            <div>
+              <h1 className="col-span-8 text-left py-2">{params.article}</h1>
+              <div
+                className="break-normal mx-4 my-2"
+                dangerouslySetInnerHTML={{ __html: webData }}
+              />
+            </div>
           ) : (
             <div>No Data Found</div>
           )}

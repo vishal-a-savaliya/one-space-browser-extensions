@@ -40,7 +40,7 @@ function TagsInput(props) {
       ))}
       <input
         onKeyDown={keyDownHandler}
-        className=" grow   outline-none p-[8px]  text-sm rounded-[8px]"
+        className=" grow   outline-none p-[8px]  text-sm"
         type="text"
         placeholder="Enter tags...(Optional)"
       ></input>

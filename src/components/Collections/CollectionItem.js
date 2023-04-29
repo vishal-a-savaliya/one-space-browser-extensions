@@ -62,7 +62,7 @@ function CollectionItem(props) {
                 data.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="bg-slate-300  inline-block  p-1 px-2 font-mono text-xs tracking-tighter"
+                    className="bg-gray-300  inline-block  p-1 px-2 font-mono text-xs tracking-tighter"
                   >
                     {tag}
                   </span>

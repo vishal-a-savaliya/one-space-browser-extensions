@@ -49,10 +49,10 @@ function AddNewSubCollection(props) {
   return (
     <>
       <div
-        className="fixed inset-0 bg-slate-500 h-[25rem] w-[25rem] opacity-80"
+        className="fixed inset-0 bg-slate-500 h-[25rem] w-[25rem] opacity-80 pt-2"
         onClick={closeHandler}
       ></div>
-      <div className="fixed w-[350px] translate-x-[23px]  translate-y-[-85px]  bg-sky-200 rounded-lg">
+      <div className="fixed w-[350px] translate-x-[23px]  translate-y-[-85px]  bg-[#f7f7f7] rounded-md">
         <div className="px-4 py-2 font-semibold text-base text-primary flex justify-between">
           Add Notes
           <div className="flex justify-center flex-col">
@@ -69,8 +69,8 @@ function AddNewSubCollection(props) {
             />
             <Input placeholder="Link" value={link} onChange={linkHandler} />
             <TagsInput onAdd={tagAddHandler} />
-            <Button onClick={submitHandler} className="p-[8px] m-[8px]">
-              Add
+            <Button onClick={submitHandler} className="p-[8px] rounded-sm shadow-sm m-[8px] font-semibold">
+              ADD
             </Button>
           </form>
         </div>
