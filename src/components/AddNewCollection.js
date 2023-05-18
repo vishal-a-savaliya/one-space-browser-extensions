@@ -49,7 +49,7 @@ function AddNewCollection(props) {
         onClick={closeHandler}
         className="fixed inset-0 bg-slate-500 h-[25rem] w-[25rem] opacity-80"
       ></div>
-      <div className="fixed w-[350px] translate-x-[23px]  translate-y-[-32px] bg-[#f7f7f7] rounded-sm">
+      <div className="fixed w-[350px] translate-x-[23px]  translate-y-[-40px] bg-[#f7f7f7] rounded-sm">
         <div className="px-4 py-2 font-semibold text-base text-primary flex justify-between ">
           Add New Collection
           <div className="flex justify-center flex-col">
@@ -63,15 +63,23 @@ function AddNewCollection(props) {
               placeholder="Collection Name"
               value={collectionName}
               onChange={nameInputHandler}
+              className="border-2 focus:drop-shadow-md"
             />
             <Input
               type="text"
               placeholder="Text"
               value={text}
               onChange={textInputHandler}
+              className="border-2 focus:drop-shadow-md"
             />
-            <TagsInput onAdd={tagAddHandler} />
-            <Button onClick={submitHandler} className="p-[8px] m-[8px] rounded-sm font-semibold">
+            <TagsInput
+              onAdd={tagAddHandler}
+              className="border-2 focus:drop-shadow-md"
+            />
+            <Button
+              onClick={submitHandler}
+              className="p-[8px] m-[8px] rounded-sm font-semibold"
+            >
               ADD
             </Button>
           </form>

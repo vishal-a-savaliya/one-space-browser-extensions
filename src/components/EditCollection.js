@@ -46,7 +46,7 @@ function EditCollection(props) {
         onClick={closeHandler}
         className="fixed inset-0 bg-slate-500 h-[25rem] w-[25rem] opacity-80"
       ></div>
-      <div className="fixed w-[350px]  translate-y-[-60px] bg-sky-200 rounded-lg">
+      <div className="fixed w-[350px]  translate-y-[-60px] bg-[#f7f7f7] rounded-lg">
         <div className="px-4 py-2 font-semibold text-base text-primary flex justify-between ">
           Edit
           <div className="flex justify-center flex-col">
@@ -61,6 +61,7 @@ function EditCollection(props) {
               placeholder="Collection Name"
               value={collectionName}
               onChange={nameInputHandler}
+              className="border-2 focus:drop-shadow-md"
             />
             <Input
               type="text"
@@ -68,8 +69,13 @@ function EditCollection(props) {
               placeholder="Text"
               value={text}
               onChange={textInputHandler}
+              className="border-2 focus:drop-shadow-md"
             />
-            <TagsInput onAdd={tagAddHandler} tags={props.tags} />
+            <TagsInput
+              onAdd={tagAddHandler}
+              tags={props.tags}
+              className="border-2 focus:drop-shadow-md"
+            />
             <Button onClick={submitHandler} className="p-[8px] m-[8px]">
               Save changes
             </Button>

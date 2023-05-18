@@ -6,9 +6,9 @@ import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import { StrictMode } from "react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter>
+  <MemoryRouter>
     {/* <StrictMode> */}
     <App />
     {/* </StrictMode> */}
-  </BrowserRouter>
+  </MemoryRouter>
 );

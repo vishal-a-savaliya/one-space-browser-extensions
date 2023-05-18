@@ -13,8 +13,7 @@
     "tabs",
     "storage",
     "activeTab",
-    "identity",
-    "https://*.firebaseapp.com/"
+    "identity"
   ],
 
   "content_security_policy": {

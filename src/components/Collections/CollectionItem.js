@@ -44,7 +44,7 @@ function CollectionItem(props) {
           onEdit={editCollectionHandler}
         />
       )}
-      <li className=" bg-secondary group grid grid-cols-10 px-2 gap-2">
+      <li className=" bg-secondary group grid grid-cols-10 px-2 gap-2  hover:drop-shadow-md">
         <Link
           className="col-span-8 "
           to={`${data.title}`}

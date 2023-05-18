@@ -32,7 +32,7 @@ function TagsInput(props) {
           <span>{tag}</span>
           <span
             onClick={() => removeTag(index)}
-            className="h-[15px] w-[15px] bg-primary text-secondary rounded-full inline-flex justify-center items-center ml-[0.5em] text-[18px]"
+            className="h-[15px] w-[15px] bg-primary text-secondary rounded-full inline-flex justify-center items-center ml-[0.5em] text-[18px] hover:cursor-pointer"
           >
             &times;
           </span>
@@ -40,7 +40,7 @@ function TagsInput(props) {
       ))}
       <input
         onKeyDown={keyDownHandler}
-        className=" grow   outline-none p-[8px]  text-sm"
+        className={` grow   outline-none p-[8px]  text-sm ${props.className}`}
         type="text"
         placeholder="Enter tags...(Optional)"
       ></input>

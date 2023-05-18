@@ -14,6 +14,8 @@ function SubCollectionScreen() {
   const params = useParams();
   const [isToggled, setIsToggled] = useState(false);
   const [subCollection, setSubCollection] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const navigate = useNavigate();
   //End Hooks
 
@@ -47,8 +49,29 @@ function SubCollectionScreen() {
     const newSubCollection = subCollection.filter(
       (subCollection) => subCollection.title !== deletingSubCollectionTitle
     );
+    if (searchInput) {
+      const searchedCollection = searchResults.filter(
+        (collection) => collection.title !== deletingSubCollectionTitle
+      );
+      setSearchResults(searchedCollection);
+    }
     setNotes(newSubCollection);
     setSubCollection(newSubCollection);
+  }
+
+  function searchHandler(e) {
+    let searchTerm = e.target.value;
+    setSearchInput(searchTerm);
+    if (searchTerm !== "") {
+      const searchedCollection = subCollection.filter((collection) => {
+        return collection.title
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+      });
+      setSearchResults(searchedCollection);
+    } else {
+      setSearchResults(subCollection);
+    }
   }
   //End Event Handlers
 
@@ -92,6 +115,8 @@ function SubCollectionScreen() {
         <Search
           additionalCSS="col-span-3"
           placeholder="Search From collection"
+          value={searchInput}
+          onSearch={searchHandler}
         ></Search>
         <Button onClick={clickHandler}>AddNew</Button>
       </Wrapper>
@@ -104,7 +129,7 @@ function SubCollectionScreen() {
       )}
       <div className="overflow-auto h-[17rem] w-[25rem]">
         <SubCollectionList
-          subCollection={subCollection}
+          subCollection={searchInput.length < 1 ? subCollection : searchResults}
           onRemoveSubCollectionItem={removeSubCollectionHandler}
           notesIndex={index}
         />

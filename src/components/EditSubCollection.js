@@ -45,7 +45,7 @@ function EditSubCollection(props) {
         className="fixed inset-0 bg-slate-500 h-[25rem] w-[25rem] opacity-80"
         onClick={closeHandler}
       ></div>
-      <div className="fixed w-[350px]  translate-y-[-115px]  bg-sky-200 rounded-lg">
+      <div className="fixed w-[350px]  translate-y-[-115px]  bg-[#f7f7f7] rounded-lg">
         <div className="px-4 py-2 font-semibold text-base text-primary flex justify-between">
           Edit
           <div className="flex justify-center flex-col">
@@ -59,9 +59,19 @@ function EditSubCollection(props) {
               placeholder="Title"
               value={title}
               onChange={titleHandler}
+              className="border-2 focus:drop-shadow-md"
             />
-            <Input placeholder="Link" value={link} onChange={linkHandler} />
-            <TagsInput onAdd={tagAddHandler} tags={props.tags} />
+            <Input
+              placeholder="Link"
+              value={link}
+              onChange={linkHandler}
+              className="border-2 focus:drop-shadow-md"
+            />
+            <TagsInput
+              onAdd={tagAddHandler}
+              tags={props.tags}
+              className="border-2 focus:drop-shadow-md"
+            />
             <Button onClick={submitHandler} className="p-[8px] m-[8px]">
               Save Changes
             </Button>

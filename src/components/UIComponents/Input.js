@@ -8,7 +8,7 @@ function Input(props) {
         placeholder={props.placeholder}
         value={props.value}
         onChange={props.onChange}
-        className=" p-[8px] m-[8px] text-sm outline-none"
+        className={`p-[8px] m-[8px] text-sm outline-none ${props.className}`}
       />
     </>
   );
